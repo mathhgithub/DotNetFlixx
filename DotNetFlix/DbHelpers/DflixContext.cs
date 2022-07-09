@@ -16,5 +16,5 @@ public class DflixContext : DbContext
     }
 
     public DbSet<UserDAL> Users { get; set; }
-    public DbSet<MovieDAL> Posts { get; set; }
+    public DbSet<MovieDAL> Movies { get; set; }
 }

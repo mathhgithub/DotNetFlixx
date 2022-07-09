@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewData["Title"] = "Admin";
+}
+<h1>Simpele admin pagina</h1>
+
+<form method="get" asp-controller="Admin" asp-action="DummyDataButton">
+   <input type="submit" value="Sync database met IMDb" />
+   <p>vergeet appsettings niet aan te passen ;-)</p>
+   <p>We gebruiken een gratis service met een limiet van 100 requests per dag gebruik de api dus niet om bv rechtstreeks data te fetchen!</p>
+</form>

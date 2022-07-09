@@ -1,17 +1,21 @@
-global using Microsoft.EntityFrameworkCore;
+global using DotNetFlix.DbEntities;
 global using DotNetFlix.DbHelpers;
-using Microsoft.EntityFrameworkCore.Design;
+global using Microsoft.EntityFrameworkCore;
+using DotNetFlix.aMyBLL.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-// Add services to the container.
+// Add services to the container
+services.AddDbContext<DflixContext>(x => x.UseSqlServer(connectionString));
 services.AddControllersWithViews();
+services.AddControllers();
 
-services.AddDbContext<DflixContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString"));
-});
+// services van Mathias
+services.AddScoped<DflixRepo<MovieDAL>>();
+services.AddHttpClient<MovieService>(c => { c.BaseAddress = new Uri("https://imdb-api.com/en/API/"); });
+
 
 var app = builder.Build();
 
@@ -25,9 +29,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthentication();
 app.UseAuthorization();
 
