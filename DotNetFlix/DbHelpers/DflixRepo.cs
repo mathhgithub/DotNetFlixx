@@ -25,14 +25,12 @@ public class DflixRepo<TEntity> where TEntity : class
         _context.SaveChanges();
     }
 
-    /*
-    public IQueryable<TEntity> GetObjectsQueryable(Expression<Func<TEntity, bool>> predicate, string includeTable = "")
+    public async Task DeleteAll()
     {
-        IQueryable<TEntity> result = _context.Set<TEntity>().Where(predicate);
-        if (includeTable != "")
-            result = result.Include(includeTable);
-
-        return result;
+        await Task.Run(() => {
+            _dbSet.RemoveRange(_dbSet.ToList());
+            _context.SaveChanges();
+        });
     }
-    */
+
 }
