@@ -10,4 +10,6 @@ public class NuttigeInfo
     // Sowieso een link om voor altijd te bewaren 
     // Deze link gebruikt voor de http client service => https://www.rahulpnath.com/blog/are-you-using-httpclient-in-the-right-way/
 
+    // idee select top 10 movies, dan koppel gebruikers op basis van vergelijking,
+    // indien match kan een van de users cinematickets bestellen voor beide
 }
