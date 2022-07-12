@@ -1,4 +1,4 @@
-﻿using DotNetFlix.aMyBLL.TempDAL;
+﻿/*
 
 namespace DotNetFlix.aMyBLL.Services;
 
@@ -13,7 +13,7 @@ public class Top10Service
         _userRepo = userRepo;
     }
 
-    public int GetMatchingUserId(UserDALL a, List<UserDALL> b)
+    public int GetMatchingUserId(UserDAL a, List<UserDAL> b)
     {
         // we gebruiken een object ScoreListItem om zowel de userId als score bij te houden      
         List<ScoreListItem> listOfScoreListItems = new List<ScoreListItem>();
@@ -45,7 +45,7 @@ public class Top10Service
         public double Score { get; set; }
     }
 
-    /*
+    
     public static double CalculateJaccardIndex<T>(ICollection<T> a, ICollection<T> b)
     {
         var intersectionCount = a.Intersect(b).Count();
@@ -54,5 +54,7 @@ public class Top10Service
         var jaccardIndex = (intersectionCount / (double)unionCount);
         return Math.Round(jaccardIndex, 2);
     }
-    */
+    
 }
+
+*/

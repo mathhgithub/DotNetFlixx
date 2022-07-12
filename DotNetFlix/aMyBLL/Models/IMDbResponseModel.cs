@@ -21,6 +21,8 @@ public class IMDbResponseModel
         [JsonProperty(PropertyName = "crew")]
         public string Crew { get; set; }
 
+        public double Prijs = 4.99;
+
     }
 
     public class MovieRoot

@@ -16,5 +16,8 @@ public class DflixContext : DbContext
     }
 
     public DbSet<UserDAL> Users { get; set; }
+
     public DbSet<MovieDAL> Movies { get; set; }
+
+    public DbSet<ShopCarTableDAL> Carts { get; set; }
 }
