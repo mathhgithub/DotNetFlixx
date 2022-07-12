@@ -62,7 +62,10 @@ BenchmarkDotNet.Artifacts/
 project.lock.json
 project.fragment.lock.json
 artifacts/
-project.appsettings.json
+*.json
+DotNetFlix/Migrations/
+Migrations/
+migrations/
 
 
 # ASP.NET Scaffolding

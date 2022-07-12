@@ -32,7 +32,8 @@ public class MovieService
                 item.Title,
                 Int32.Parse(item.Year),
                 item.ImageUrl,
-                item.Crew
+                item.Crew,
+                item.Prijs
                 ));
         }
         return "succes";
