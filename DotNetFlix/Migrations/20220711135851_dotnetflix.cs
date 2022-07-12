@@ -4,7 +4,7 @@
 
 namespace DotNetFlix.Migrations
 {
-    public partial class test : Migration
+    public partial class dotnetflix : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

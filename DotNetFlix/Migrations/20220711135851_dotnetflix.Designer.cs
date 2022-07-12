@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotNetFlix.Migrations
 {
     [DbContext(typeof(DflixContext))]
-    [Migration("20220708225227_test")]
-    partial class test
+    [Migration("20220711135851_dotnetflix")]
+    partial class dotnetflix
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
