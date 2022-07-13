@@ -42,9 +42,6 @@ namespace DotNetFlix.Migrations
                     b.Property<int>("Rank")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ShopCarTableDALId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
@@ -53,69 +50,74 @@ namespace DotNetFlix.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ShopCarTableDALId");
-
                     b.ToTable("Movies");
                 });
 
-            modelBuilder.Entity("DotNetFlix.DbEntities.ShopCarTableDAL", b =>
+            modelBuilder.Entity("DotNetFlix.DbEntities.ShoppingCartItemDAL", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ShoppingCartItemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ShoppingCartItemId"), 1L, 1);
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("MovieDALId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.Property<int>("UserForeignKey")
+                        .HasColumnType("int");
 
-                    b.ToTable("Carts");
+                    b.HasKey("ShoppingCartItemId");
+
+                    b.HasIndex("MovieDALId");
+
+                    b.HasIndex("UserForeignKey");
+
+                    b.ToTable("CartItems");
                 });
 
             modelBuilder.Entity("DotNetFlix.DbEntities.UserDAL", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"), 1L, 1);
 
-                    b.HasKey("Id");
+                    b.Property<string>("UserFirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserLastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
 
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("DotNetFlix.DbEntities.MovieDAL", b =>
+            modelBuilder.Entity("DotNetFlix.DbEntities.ShoppingCartItemDAL", b =>
                 {
-                    b.HasOne("DotNetFlix.DbEntities.ShopCarTableDAL", null)
-                        .WithMany("Items")
-                        .HasForeignKey("ShopCarTableDALId");
-                });
+                    b.HasOne("DotNetFlix.DbEntities.MovieDAL", "MovieDAL")
+                        .WithMany()
+                        .HasForeignKey("MovieDALId");
 
-            modelBuilder.Entity("DotNetFlix.DbEntities.ShopCarTableDAL", b =>
-                {
-                    b.HasOne("DotNetFlix.DbEntities.UserDAL", "User")
-                        .WithOne("ShoppingCart")
-                        .HasForeignKey("DotNetFlix.DbEntities.ShopCarTableDAL", "UserId")
+                    b.HasOne("DotNetFlix.DbEntities.UserDAL", "UserDAL")
+                        .WithMany("ShoppingCartItems")
+                        .HasForeignKey("UserForeignKey")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
-                });
+                    b.Navigation("MovieDAL");
 
-            modelBuilder.Entity("DotNetFlix.DbEntities.ShopCarTableDAL", b =>
-                {
-                    b.Navigation("Items");
+                    b.Navigation("UserDAL");
                 });
 
             modelBuilder.Entity("DotNetFlix.DbEntities.UserDAL", b =>
                 {
-                    b.Navigation("ShoppingCart");
+                    b.Navigation("ShoppingCartItems");
                 });
 #pragma warning restore 612, 618
         }

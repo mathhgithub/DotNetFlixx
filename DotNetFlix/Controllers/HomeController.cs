@@ -1,4 +1,5 @@
-﻿using DotNetFlix.Models;
+﻿using DotNetFlix.aMyBLL.Services;
+using DotNetFlix.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,15 +8,18 @@ namespace DotNetFlix.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly MovieService _movieService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, MovieService movieService)
         {
             _logger = logger;
+            _movieService = movieService;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var model = _movieService.GetAllMoviesToList();
+            return View(model);
         }
 
         public IActionResult Privacy()

@@ -19,5 +19,17 @@ public class DflixContext : DbContext
 
     public DbSet<MovieDAL> Movies { get; set; }
 
-    public DbSet<ShopCarTableDAL> Carts { get; set; }
+    public DbSet<ShoppingCartItemDAL> CartItems { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+
+        modelBuilder.Entity<ShoppingCartItemDAL>()
+            .HasOne(x => x.MovieDAL);
+
+        modelBuilder.Entity<ShoppingCartItemDAL>()
+            .HasOne<UserDAL>(s => s.UserDAL)
+            .WithMany(g => g.ShoppingCartItems)
+            .HasForeignKey(s => s.UserForeignKey);
+    }
 }

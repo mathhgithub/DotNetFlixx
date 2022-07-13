@@ -14,8 +14,11 @@ services.AddControllers();
 
 // services van Mathias
 services.AddScoped<DflixRepo<UserDAL>>();
-services.AddScoped<DflixRepo<ShopCarTableDAL>>();
-services.AddScoped<ShopCarService>();
+services.AddScoped<UserService>();
+
+services.AddScoped<DflixRepo<ShoppingCartItemDAL>>();
+services.AddScoped<ShoppingCartService>();
+
 services.AddScoped<DflixRepo<MovieDAL>>();
 services.AddHttpClient<MovieService>(c => { c.BaseAddress = new Uri("https://imdb-api.com/en/API/"); });
 
