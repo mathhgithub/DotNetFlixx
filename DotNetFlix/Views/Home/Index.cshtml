@@ -1,13 +1,49 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<DotNetFlix.DbEntities.MovieDAL>
+
+@{
+    ViewData["Title"] = "Index";
 }
+
+
 <h1>Homepage</h1>
-test
+
 <form>
     <p>
         Title: <input type="text" name="Searchstring" />
         <input type="submit" value="Filter" />
+        <input type="submit" value="Reset" />
     </p>
+
 </form>
 
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Rank)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Year)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rank)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Year)
+            </td>
 
+        </tr>
+}
+    </tbody>
+</table>

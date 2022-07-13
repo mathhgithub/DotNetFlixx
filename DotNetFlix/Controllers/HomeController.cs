@@ -6,16 +6,27 @@ namespace DotNetFlix.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly DflixContext _context;
+        public HomeController(DflixContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View();
+            var movies = from m in _context.Movies
+                         select m;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                movies = movies.Where(s => s.Title.Contains(searchString));
+            }
+            return View(await movies.ToListAsync());
+        }
+
+        public IActionResult Reset()
+        {
+            return View(_context.Movies);
         }
 
         public IActionResult Privacy()
