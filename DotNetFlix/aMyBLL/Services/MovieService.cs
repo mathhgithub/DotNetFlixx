@@ -15,7 +15,6 @@ public class MovieService
         _repo = repo;
     }
 
-    //https://localhost:7006/IMDb/GetDummyData
     public async Task<string> SyncDummyData()
     {
         string APIURL = "Top250Movies/k_ct5w24y4";
@@ -37,6 +36,19 @@ public class MovieService
                 ));
         }
         return "succes";
+    }
+
+    public async Task<MovieDAL> GetRandomModel()
+    {
+        var rnd= new Random();
+        var model = await _repo.GetByUserName(rnd.Next(0,250));
+        return model;
+    }
+
+    public async Task<List<MovieDAL>> GetAllMoviesToList()
+    {
+        var model = await _repo.GetAllAsync();
+        return model;
     }
 
 }

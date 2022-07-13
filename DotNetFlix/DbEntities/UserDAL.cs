@@ -1,8 +1,16 @@
-﻿namespace DotNetFlix.DbEntities;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DotNetFlix.DbEntities;
 
 public class UserDAL
 {
-    public int Id { get; set; }
-    public ShopCarTableDAL ShoppingCart { get; set; }
+    [Key]
+    public int UserId { get; set; }
+
+    public string UserFirstName { get; set; }
+
+    public string UserLastName { get; set; }
+
+    public List<ShoppingCartItemDAL> ShoppingCartItems { get; set; }
 
 }

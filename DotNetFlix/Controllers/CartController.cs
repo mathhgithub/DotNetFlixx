@@ -1,29 +1,30 @@
 ﻿using DotNetFlix.aMyBLL.Services;
+using DotNetFlix.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DotNetFlix.Controllers;
 
 public class CartController : Controller
 {
-    private readonly ShopCarService _shopCarService;
+    private readonly ShoppingCartService _shopCarService;
 
-    public CartController(ShopCarService shopCarService)
+    public CartController(ShoppingCartService shopCarService)
     {
         _shopCarService = shopCarService;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        var model = _shopCarService.GetShopCarForUser(0);
-        if (model == null) { return View("Index", model);}
-        else { return View("Index"); }
-        
+        var viewModel = await _shopCarService.GetCartForUser(1);
+        if (viewModel == null) { return View("Index"); } 
+        else { return View("Index",viewModel); }    
     }
 
+
     [HttpPost]
-    public ActionResult Edit(int std)
+    public async Task<ActionResult> AddToCart()
     {
-        // update student to the database
+        var newItem = await _shopCarService.GetCartForUser(1);
 
         return RedirectToAction("Index");
     }

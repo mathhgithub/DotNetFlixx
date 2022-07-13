@@ -1,4 +1,4 @@
-﻿using DotNetFlix.Models;
+using DotNetFlix.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
