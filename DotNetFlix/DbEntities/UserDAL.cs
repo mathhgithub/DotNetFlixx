@@ -11,6 +11,5 @@ public class UserDAL
 
     public string UserLastName { get; set; }
 
-    public List<ShoppingCartItemDAL> ShoppingCartItems { get; set; }
-
+  
 }

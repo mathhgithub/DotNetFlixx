@@ -2,7 +2,7 @@
 
 public class NuttigeInfo
 {
-    // Benieuwd naar mijn features? Dit is mijn log :-)
+    // Info over men features en nuttige referenties
 
     // feature "Dummy Data"
     // Hoe Consume ik een REST api? Heel veel research moeten doen maar uiteindelijk komt het er op neer json data
@@ -12,4 +12,9 @@ public class NuttigeInfo
 
     // idee select top 10 movies, dan koppel gebruikers op basis van vergelijking,
     // indien match kan een van de users cinematickets bestellen voor beide
+
+    // feature shopping cart
+    // voorbeeld voor models https://knowledgebase.fabric.inc/docs/openapi/cart_v2/reference/
+    // goed voorbeeld voor mvc https://www.endpointdev.com/blog/2021/07/dotnet-5-web-api/
+    // CartsController => CartsService => Database
 }

@@ -10,17 +10,34 @@ namespace DotNetFlix.DbHelpers;
 
 public class DflixContext : DbContext
 {
-    public DflixContext(DbContextOptions options) : base(options)
+    public DflixContext(DbContextOptions options) : base(options) {}
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
 
+        modelBuilder.Entity<CartDAL>()
+              .HasMany(a => a.CartItems)
+              .WithOne(e => e.CartDAL)
+              .IsRequired();
+
+        modelBuilder.Entity<CartItemDAL>()
+              .HasOne(a => a.MovieDAL);
+
+
+        modelBuilder.Entity<UserDAL>().HasData(new UserDAL
+        {
+            UserId = 1,
+            UserFirstName = "John",
+            UserLastName = "Snow",
+        });
     }
 
     public DbSet<UserDAL> Users { get; set; }
-
     public DbSet<MovieDAL> Movies { get; set; }
+    public DbSet<CartDAL> Carts { get; set; }
+    public DbSet<CartItemDAL> CartItems { get; set; }
 
-    public DbSet<ShoppingCartItemDAL> CartItems { get; set; }
-
+    /*
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
 
@@ -32,4 +49,5 @@ public class DflixContext : DbContext
             .WithMany(g => g.ShoppingCartItems)
             .HasForeignKey(s => s.UserForeignKey);
     }
+    */
 }

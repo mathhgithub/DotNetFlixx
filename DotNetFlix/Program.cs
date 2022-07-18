@@ -10,18 +10,16 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 // Add services to the container
 services.AddDbContext<DflixContext>(x => x.UseSqlServer(connectionString));
 services.AddControllersWithViews();
-services.AddControllers();
 
 // services van Mathias
 services.AddScoped<DflixRepo<UserDAL>>();
-services.AddScoped<UserService>();
-
-services.AddScoped<DflixRepo<ShoppingCartItemDAL>>();
-services.AddScoped<ShoppingCartService>();
-
+services.AddScoped<DflixRepo<CartDAL>>();
+services.AddScoped<DflixRepo<CartItemDAL>>();
 services.AddScoped<DflixRepo<MovieDAL>>();
+services.AddScoped<UserService>();
+services.AddScoped<CartsService>();
 services.AddHttpClient<MovieService>(c => { c.BaseAddress = new Uri("https://imdb-api.com/en/API/"); });
-
+//
 
 var app = builder.Build();
 
