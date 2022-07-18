@@ -1,0 +1,71 @@
+﻿@using DotNetFlix.aMyBLL.Models.Carts
+@model CartDAL
+
+@{
+    ViewData["Title"] = "Winkelwagen";
+}
+
+
+
+
+<div class="cart-container-wrapper" >
+
+    <div class="cart-container-links">
+        <h3>Winkelwagen (@Model.TotalItems artikelen)</h3>
+
+        @if (Model != null)
+        {
+
+            foreach (var line in Model.CartItems)
+            {
+                <div class="cart-item">
+                    <img src="@line.MovieDAL.ImageUrl">
+                    <p>@line.MovieDAL.Title</p>
+                    <p>@line.Quantity</p>
+                    
+                    <div>
+                        <form asp-controller="Carts" asp-action="AddToCart" method="post"> 
+                           <input type="hidden" name="MovieId" value=@line.MovieFK>
+                           <input type="hidden" name="Quantity" value=1>
+                           <input type="hidden" name="UserId" value=@Model.UserId>
+                           <input type="submit" value="plus">
+                        </form>  
+                        
+                        <form asp-controller="Carts" asp-action="AddToCart" method="post"> 
+                           <input type="hidden" name="MovieId" value=@line.MovieFK>
+                           <input type="hidden" name="Quantity" value=-1>
+                           <input type="hidden" name="UserId" value=@Model.UserId>
+                           <input type="submit" value="min">
+                        </form> 
+                    </div>
+
+                </div>
+            }
+        }
+
+
+    </div>
+
+    <div class="cart-container-rechts">
+        <h3>Totaalprijs</h3>
+
+        <div class="cart-item-subtotaal">
+            <p>Subtotaal</p>
+            <p>@Model.SubTotaal</p>
+        </div>
+
+        <div class="cart-item-subtotaal">
+            <p>Verzending</p>
+            <p>@Model.Shipping</p>
+        </div>
+
+        <div class="cart-item-totaal">
+            <p>Totaal (inclusief BTW)</p>
+            <p>@Model.Totaal</p>
+        </div>
+
+        <button>CHECKOUT</button>
+    </div>
+
+</div>
+
